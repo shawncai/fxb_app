@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>  
+		<script src="js/jquery-2.1.0.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		
+		<style>body {
+	background: #FFF;
+}
+
+.form-bao {
+	display: flex;
+	margin-top: 50px;
+	justify-content: center;
+	align-content: center;
+}
+
+.form-bao .mui-input-group .mui-input-row {
+	margin-top: 30px;
+}</style>
+	</head>
+
+	<body class="ui-page-login" style="background: #ededed;">
+		<header class="mui-bar mui-bar-nav" style="background: #69e2b9;">
+			
+			<h1 class="mui-title" style="color: #fff;font-weight: bold;font-size: 20px;">辅训宝</h1>
+<!--<a class="mui-icon mui-icon-search" style="color: #fff;float: right;"></a>-->
+		</header>
+		<div class="content">
+			<div class="mui-card" style="height:150px;margin: 0;margin-top: 43px;box-shadow: none;background:url(images/fxb01.png) no-repeat;background-size: 100% 100%;">
+								<!--<div class="mui-card-content" > 
+					<img src="images/fxb01.png" alt="" width="100%">
+				</div>-->
+				
+			</div>
+			
+			<div class="mui-card" style="border-radius: 4px;height: 32px; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);margin: 19px;margin-top: 10px;margin-bottom: 10px;">
+
+	<div class="mui-card-content" style="color:#ec0800;padding-top: 5px;padding-left: 10px;font-size: 16px;">最新公告&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #333;font-size: 14px;">周五大扫除</span></div>
+
+			</div>
+<!--
+	登录表单
+-->
+<div class="mui-card" style="border-radius:8px ;box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);margin: 19px;margin-top: 0px;">
+<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #fff;">
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="today" style="border: none;"><a href="renwu.html">
+		                    <span><img src="images/2.png" style="width: 40px;height: 40px;"></span>
+		                    <div class="mui-media-body">今日作业</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id='cuoti' style="border: none;"><a href="#">
+		                    <span ><img src="images/3.png" style="width: 40px;height: 40px;"></span>
+		                    <div class="mui-media-body">我的错题</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" style="border: none;"><a href="#">
+		                    <img src="images/4.png" style="width: 40px;height: 40px;"></span>
+		                    <div class="mui-media-body">考点总结</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" style="border: none;"><a href="#">
+		                    <span ><img src="images/5.png" style="width: 40px;height: 40px;"></span>
+		                    <div class="mui-media-body">专项训练</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" style="border: none;"><a href="#">
+		                     <span ><img src="images/6.png" style="width: 40px;height: 40px;"></span>
+		                    <div class="mui-media-body">师生交流</div></a></li>
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" style="border: none;"><a href="#">
+		                    <span ><img src="images/7.png" style="width: 40px;height: 40px;"></span>
+		                    <div class="mui-media-body">活动公告</div></a></li>
+		            
+		        </ul> 
+        
+</div>
+
+<nav class="mui-bar mui-bar-tab" style="box-shadow: none;background: #fff;">
+	
+	<ul class="bottom" id="bottom" style="margin: 0;padding: 0;padding-top: 6px;">
+            <li class="mui-tab-item mui-active" style="margin: 0;padding: 0;">
+                <img src="images/verify_tabicon_01_selected.png.png" style="width: 20%;"/></br>
+                <span>首页</span>
+            </li>
+            <li class="mui-tab-item" style="margin: 0;padding: 0;">
+                <img src="images/verify_tabicon_02.png.png" style="width:30%;"/></br>
+                <span>班群</span>
+            </li>
+            <li class="mui-tab-item" style="margin: 0;padding: 0;">
+                <img src="images/verify_tabicon_03.png.png" style="width: 20%;"/></br>
+                <span>作业</span>
+            </li>
+            <li class="mui-tab-item" style="margin: 0;padding: 0;">
+                <img src="images/verify_tabicon_04.png.png" style="width: 20%;"/></br>
+                <span>我的</span>
+            </li>
+        </ul>
+	
+		    <!--<a class="mui-tab-item mui-active">
+		        <span class="mui-icon mui-icon-home" style="top: 6px;"><img src="images/zy1.png" style="width: 70%;"></span>
+		        <span class="mui-tab-label" style="font-size: 16px;">首页</span>
+		    </a>
+		    
+		    <a class="mui-tab-item">
+		        <span class="mui-icon mui-icon-list" ><img src="images/bq1.png" style="width: 85%;"></span>
+		        <span class="mui-tab-label" style="font-size: 16px;">班群</span>
+		    </a>
+		    <a class="mui-tab-item">
+		        <span class="mui-icon mui-icon-list"><img src="images/zuoy1.png" style="width: 70%;"></span>
+		        <span class="mui-tab-label" style="font-size: 16px;">作业</span>
+		    </a>
+		    <a class="mui-tab-item">
+		        <span class="mui-icon mui-icon-contact"><img src="images/wd1.png" style="width: 70%;"></span>
+		        <span class="mui-tab-label" style="font-size: 16px;">我的</span>
+		    </a>-->
+		</nav>
+		</div>
+	
+	</body>
+	<script type="text/javascript">mui.init({
+	swipeBack: true,
+	keyEventBind: {
+		backbutton: false, //Boolean(默认true)关闭back按键监听
+		menubutton: false //Boolean(默认true)关闭menu按键监听
+	},
+});
+
+mui.plusReady(
+	function() {
+		plus.navigator.setStatusBarBackground('#69e2b9');
+		
+		
+//		var cuoti=document.getElementById('cuoti')
+//		cuoti.addEventListener('tap',function() {
+//			mui.openWindow({
+//				id:'cuoti.html',
+//				url:'cuoti.html'
+//			})
+//		})
+		
+		
+		
+		
+		 var tou = localStorage.token
+		
+		var accountval =localStorage.accountval
+		console.log(accountval)
+		console.log(tou)
+		mui.ajax(`${sever}mgr/getId`,{
+	data:{
+		account:accountval
+	},
+	dataType:'json',//服务器返回json格式数据
+	type:'post',//HTTP请求类型
+	timeout:10000,//超时时间设置为10秒；
+	headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Authorization': "" + 'Bearer ' + tou + ""
+		},			              
+	success:function(data){
+		console.log(JSON.stringify(data));
+      localStorage.setItem('ID',data);  
+      var today = document.getElementById('today')
+		today.addEventListener('tap', function() {
+			var webview = mui.openWindow({
+				id: 'renwu.html',
+				url: 'renwu.html'
+				
+			});
+
+		})
+	},
+	error:function(xhr,type,errorThrown){
+	
+		console.log(type);
+		
+	}
+});
+	
+	
+	var bottom = document.getElementById('bottom')
+		bottom.addEventListener('tap', function(event) {
+	
+                if(event.target.tagName === 'IMG'){
+                var nodes = $('#bottom li img');
+                
+                for(var i=0; i<nodes.length; i++){
+                    nodes[i].src = nodes[i].src.replace(/.png|_selected.png/,'.png');
+                  
+                }
+                event.target.src = event.target.src.replace(/.png|_selected.png/,'_selected.png');
+            }}
+            )
+	
+	
+	})</script>
+
+</html>

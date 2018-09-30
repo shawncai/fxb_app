@@ -1,0 +1,32 @@
+package wy.rest.addons.fxb.xgt_sub_qp.dao;
+import java.util.List;
+import java.util.Map;
+import org.apache.ibatis.annotations.Param;
+
+/**
+ * 题目Dao
+ *
+ * @author wyFrame
+ * @Date 2018-09-05 16:40:06
+ */
+public interface Xgt_sub_qpDao {
+	List<Map<String, Object>> list(@Param("condition") String condition);
+
+
+    List<Map<String, Object>> getMap2();
+    List<Map<String, Object>> getMap4();
+    List<Map<String, Object>> getMap5();
+    List<Map<String, Object>> getMap18();
+
+    List<Map<String, Object>> getDanxuan(@Param("subexamId") Integer subexamId);
+
+    List<Map<String, Object>> getPanduan(@Param("subexamId") Integer subexamId);
+
+
+    void deleteByIds(@Param("list") List<Integer> list);
+
+       List<Map<String, Object>> getMapByPar();
+
+
+          List<Map<String, Object>> list4(@Param("condition") String condition, @Param("id") Integer id);
+}

@@ -1,0 +1,155 @@
+package wy.rest.addons.fxb.xgt_sub_task_dtl.controller;
+
+
+import com.alibaba.fastjson.JSON;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.toolkit.StringUtils;
+import org.springframework.web.bind.annotation.*;
+import wy.core.base.controller.BaseController;
+import org.springframework.stereotype.Controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.ui.Model;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import wy.rest.addons.fxb.xgt_sub_task.model.Xgt_sub_task;
+import wy.rest.addons.fxb.xgt_sub_task_dtl.dao.Xgt_sub_task_dtlDao;
+import wy.rest.addons.fxb.xgt_sub_task_dtl.dao.Xgt_sub_task_dtlMapper;
+import wy.rest.addons.fxb.xgt_sub_task_dtl.model.Xgt_sub_task_dtl;
+import wy.rest.config.properties.XydProperties;
+import wy.rest.modular.auth.util.JsonUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 任务详情控制器
+ *
+ * @author wyFrame
+ * @Date 2018-09-05 15:20:52
+ */
+@Controller
+@RequestMapping("/xgt_sub_task_dtl")
+public class Xgt_sub_task_dtlController extends BaseController {
+
+    private String PREFIX = "/addons/fxb/xgt_sub_task_dtl/";
+	@Resource
+    Xgt_sub_task_dtlDao xgt_sub_task_dtlDao;
+	
+	@Resource
+    Xgt_sub_task_dtlMapper xgt_sub_task_dtlMapper;
+
+	@Resource
+    XydProperties xydProperties;
+
+	//用户完成作业提交并判定
+    @RequestMapping(value = "/add")
+    @ResponseBody
+    public Object add(HttpServletRequest request, HttpServletResponse response,@RequestBody JSONObject obj){
+        System.err.println(obj);
+        String data=obj.toJSONString();
+        JSONObject json = JSON.parseObject(data);
+        String jsonArray=json.getString("jsonArray");
+        String userId=json.getString("userId");
+        String task_obj_id=json.getString("task_obj_id");
+        String nowdate=json.getString("myDate");
+        System.err.println(nowdate);
+        System.err.println(userId);
+        Integer userid=Integer.parseInt(userId);
+        Integer taskobjId=Integer.parseInt(task_obj_id);
+        System.err.println(taskobjId);
+        Integer cpnId=this.xgt_sub_task_dtlDao.selectCpnId(userid);
+        if(StringUtils.isNotEmpty(jsonArray)){
+            JSONArray jsonArray1=JSONArray.parseArray(jsonArray);
+            for(int i=0;i<jsonArray1.size();i++){
+                String user_ask=JSONObject.parseObject(JSONObject.toJSONString(jsonArray1.get(i))).getString("user_ask");
+                Integer sub_qp_id=JSONObject.parseObject(JSONObject.toJSONString(jsonArray1.get(i))).getInteger("sub_qp_id");
+                System.err.println(user_ask);
+                System.err.println(sub_qp_id);
+                Xgt_sub_task_dtl Xgt_sub_task_dtl=new Xgt_sub_task_dtl();
+                Xgt_sub_task_dtl.setUser_ask(user_ask);
+                Xgt_sub_task_dtl.setSub_qp_id(sub_qp_id);
+                Xgt_sub_task_dtl.setOver_id(userid);
+                Xgt_sub_task_dtl.setSt_id(1);
+                Xgt_sub_task_dtl.setTask_obj_id(taskobjId);
+                Xgt_sub_task_dtl.setCre_dt(nowdate);
+                String Rightask=xgt_sub_task_dtlDao.selectRightAsk(sub_qp_id);
+                Xgt_sub_task_dtl.setRight_ask(Rightask);
+                Xgt_sub_task_dtl.setCpn_id(cpnId);
+                if (user_ask.equals(Rightask)){
+                    Xgt_sub_task_dtl.setRight_errof_flg(1);
+                }
+                else{
+                    Xgt_sub_task_dtl.setRight_errof_flg(0);
+                }
+                xgt_sub_task_dtlMapper.insert(Xgt_sub_task_dtl);
+                }
+        }
+        this.xgt_sub_task_dtlDao.updateOverStId(userid,taskobjId);
+        return null;
+    }
+
+
+    //学生我的作业完成后选择题答题情况
+    @RequestMapping(value = "/Danxuanlist")
+    @ResponseBody
+    public Object XuanZelist(@RequestParam Integer Id,@RequestParam String myDate){
+        List<Map<String, Object>> danxuanlist = this.xgt_sub_task_dtlDao.Danxuanlist(Id,myDate);
+        System.err.println(danxuanlist);
+        return danxuanlist;
+    }
+    //学生我的作业完成后判断题答题情况
+    @RequestMapping(value = "/Wanxinglist")
+    @ResponseBody
+    public Object Wanxinglist(@RequestParam Integer Id,@RequestParam String myDate){
+        List<Map<String, Object>> wanxinglist = this.xgt_sub_task_dtlDao.Wanxinglist(Id,myDate);
+        System.err.println(wanxinglist);
+        return wanxinglist;
+    }
+
+    //学生我的作业完成后判断题答题情况
+    @RequestMapping(value = "/Yuedulist")
+    @ResponseBody
+    public Object Yuedulist(@RequestParam Integer Id,@RequestParam String myDate){
+        List<Map<String, Object>> yuedulist = this.xgt_sub_task_dtlDao.Yuedulist(Id,myDate);
+        System.err.println(yuedulist);
+        return yuedulist;
+    }
+
+
+    //历史错题-选择题
+    @RequestMapping(value = "/XuanZeError")
+    @ResponseBody
+    public Object XuanZeError(@RequestParam Integer userId){
+        List<Map<String, Object>> XuanZeError = this.xgt_sub_task_dtlDao.XuanZeError(userId);
+        System.err.println(XuanZeError);
+        return XuanZeError;
+    }
+
+    //历史错题-判断题
+    @RequestMapping(value = "/PanDuanError")
+    @ResponseBody
+    public Object PanDuanError(@RequestParam Integer userId){
+        List<Map<String, Object>> PanDuanError = this.xgt_sub_task_dtlDao.PanDuanError(userId);
+        System.err.println(PanDuanError);
+        return PanDuanError;
+    }
+
+    //查看学生作业错题排行
+    @RequestMapping(value = "/selectZuotiList")
+    @ResponseBody
+    public Object selectZuotiList(@RequestParam Integer task_id,@RequestParam Integer cpn_dept_id){
+        System.err.println(task_id);
+        System.err.println(cpn_dept_id);
+        List<Map<String, Object>>selectZuotiList=this.xgt_sub_task_dtlDao.selectZuotiList(task_id,cpn_dept_id);
+        System.err.println(selectZuotiList);
+        return  selectZuotiList;
+    }
+}

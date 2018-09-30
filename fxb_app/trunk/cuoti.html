@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="layui/css/layui.css" rel="stylesheet">
+	</head>
+	<body style="background: #fff;">
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="layui/layui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" style="background: #69e2b9;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #fff;"></a>
+			<h1 class="mui-title" style="color: #fff;font-weight: bold;font-size: 20px;">我的错题</h1>
+		</header>
+		<div class="mui-content" id="tableData">
+			<div class="mui-card" style="margin: 0;box-shadow: none;">
+				<ul class="mui-table-view" id="datika">
+					<li class="mui-table-view-cell nm1" style="font-size:18px;color: #6d6d6d;font-weight: bold;">选择题</li>
+					<li class="mui-table-view-cell nm1" style="padding-top: 0px;padding-bottom: 0px;">
+			<div class="xuhao" style="float: left;margin-left: 2px;margin-top: 8px;font-size: 15px;" id="{sub_qp_id}"><span style="height: 30px;float: left;">1、</span><p>客人来访时,我们要为客人打开房门。当房门向外开时()进</p></div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;width: 100%;">
+				<input name="{sub_qp_id}" type="radio" value="A" class="rds">
+				<label >A.客人先进</label>
+				
+			</div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;width: 100%;">
+				<label >B.同时进门</label>
+				<input name="{sub_qp_id}" type="radio" value="B" class="rds">
+			</div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;width: 100%;">
+				<label >C.我们先进</label>
+				<input name="{sub_qp_id}" type="radio" value="C" class="rds">
+			</div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;width: 100%;">
+				<label >D.正面朝向对方</label>
+				<input name="{sub_qp_id}" type="radio" value="D" class="rds">
+			</div>
+<div class="jiexi1" style="margin-left: 25px;margin-top: 15px;">
+	<p>考生答案:</p>
+</div>
+<div class="jiexi2" style="margin-left: 25px;margin-top: 15px;">
+	<p>正确答案:</p>
+</div>
+<div class="jiexi3" style="margin-left: 25px;margin-top: 15px;">
+	<p>解释说明:</p>
+</div>
+		</li>
+					<div class="line" style="border-top: 1px solid #f5f5f5;width: 90%;margin: 0 auto;margin-bottom: 6px;"></div>
+				</ul>
+				<ul class="mui-table-view" id="panduan">
+					<li class="mui-table-view-cell nm1" style="font-size: 18px;color: #6d6d6d;font-weight: bold;">判断题</li>
+					<div class="line" style="border-top: 1px solid #f5f5f5;width: 90%;margin: 0 auto;margin-bottom: 6px;"></div>
+				</ul>
+			</div>
+			
+		</div>
+	</body>
+	<script type="text/html" id="xuanzhe">
+		<li class="mui-table-view-cell nm1" style="padding-top: 0px;padding-bottom: 0px;">
+			{{#  layui.each(d, function(index, item){ }}
+			<div class="xuhao" style="float: left;margin-left: 2px;margin-top: 8px;font-size: 15px;" id="{{item.sub_qp_id}}"><span style="float: left;">{{item.sub_qp_id}}、</span><p style="float: left;margin-top: 5px;">{{item.sub_qp_title}}</p></div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;width: 100%;">
+				<input name="{{item.sub_qp_id}}" type="radio" value="A"  {{ item.user_ask == 'A' ? 'checked ': '' }}>
+				<label >A.{{item.sub_qp_sel_a}}</label>
+			 </div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;width: 100%;">
+				<label >B.{{item.sub_qp_sel_b}}</label>
+				<input name="{{item.sub_qp_id}}" type="radio" value="B" {{ item.user_ask == 'B' ? 'checked ': '' }}>
+			</div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;width: 100%;">
+				<label >C.{{item.sub_qp_sel_c}}</label>
+				<input name="{{item.sub_qp_id}}" type="radio" value="C" {{ item.user_ask == 'C' ? 'checked ': '' }}>
+			</div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;width: 100%;">
+				<label >D.{{item.sub_qp_sel_d}}</label>
+				<input name="{{item.sub_qp_id}}" type="radio" value="D" {{ item.user_ask == 'D' ? 'checked ': '' }}>
+			</div>
+			<div class="jiexi">
+<div class="mui-input-row mui-radio mui-left" style="margin-left: 25px;margin-top: 15px;">
+	<p>考生答案:{{item.user_ask}}</p>
+</div>
+<div class="mui-input-row mui-radio mui-left" style="margin-left: 25px;margin-top: 15px;">
+	<p>正确答案:{{item.right_ask}}</p>
+</div>
+<div class="mui-input-row mui-radio mui-left" style="margin-left: 25px;margin-top: 15px;">
+	<p>解释说明:{{item.sub_qp_anl}}</p>
+</div>
+</div>
+  {{#  }); }}
+  
+		</li>
+	</script>
+
+	<script type="text/html" id="panduan1">
+		<li class="mui-table-view-cell nm1" style="padding-top: 0px;padding-bottom: 0px;">
+			<div class="xuhao" style="float: left;margin-left: 2px;margin-top: 8px;font-size: 15px;" id="{sub_qp_id}">{lie_shu}、</div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;">
+				<label>正确</label>
+				<input name="{sub_qp_id}" type="radio" value="1" class="rds">
+			</div>
+			<div class="mui-input-row mui-radio mui-left" style="float: left;clear: none;">
+				<label>错误</label>
+				<input name="{sub_qp_id}" type="radio" value="0" class="rds">
+			</div>
+
+		</li>
+	</script>
+	<script>
+		
+		mui.init({
+			swipeBack: true,
+			keyEventBind: {
+				backbutton: false, //Boolean(默认true)关闭back按键监听
+				menubutton: false //Boolean(默认true)关闭menu按键监听
+			},
+		});
+		mui.plusReady(function() {
+			
+			
+			
+			
+			
+			
+			plus.navigator.setStatusBarBackground('#69e2b9');
+
+			var userId = localStorage.ID;
+			var tou = localStorage.token
+			
+			mui.ajax(`${sever}xgt_sub_task_dtl/XuanZeError`, {
+				data: {
+					'userId': userId
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Authorization': "" + 'Bearer ' + tou + ""
+				},
+				success: function(DATA) {
+					console.log(JSON.stringify(DATA))
+					console.log(DATA.length)
+				layui.use('laytpl', function(){
+				laytpl=layui.laytpl;
+				var data = DATA;
+				var xuanzhe=document.getElementById('xuanzhe').innerHTML
+	     
+	laytpl(xuanzhe).render(data, function(html){
+//	  datika.innerHTML = html;
+	  $('#datika').append(html);
+	});
+});
+				
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(type);
+				}
+			});
+
+			
+			
+
+		})
+		
+	</script>
+	
+
+</html>

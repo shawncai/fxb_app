@@ -1,0 +1,61 @@
+package wy.rest.addons.fxb.xgt_sub_task_dtl.controller;
+
+
+import com.alibaba.fastjson.JSON;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.springframework.web.bind.annotation.*;
+import wy.core.base.controller.BaseController;
+import org.springframework.stereotype.Controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.ui.Model;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import wy.rest.addons.fxb.xgt_sub_task.model.Xgt_sub_task;
+import wy.rest.addons.fxb.xgt_sub_task_dtl.dao.Xgt_sub_task_dtlDao;
+import wy.rest.addons.fxb.xgt_sub_task_dtl.dao.Xgt_sub_task_dtlMapper;
+import wy.rest.addons.fxb.xgt_sub_task_dtl.model.Xgt_sub_task_dtl;
+import wy.rest.config.properties.XydProperties;
+import wy.rest.modular.auth.util.JsonUtil;
+
+import java.util.Map;
+
+/**
+ * 任务详情控制器
+ *
+ * @author wyFrame
+ * @Date 2018-09-05 15:20:52
+ */
+@Controller
+@RequestMapping("/xgt_sub_task_dtl")
+public class Xgt_sub_task_dtlController extends BaseController {
+
+    private String PREFIX = "/addons/fxb/xgt_sub_task_dtl/";
+	@Resource
+    Xgt_sub_task_dtlDao xgt_sub_task_dtlDao;
+	
+	@Resource
+    Xgt_sub_task_dtlMapper xgt_sub_task_dtlMapper;
+
+	@Resource
+    XydProperties xydProperties;
+
+    @RequestMapping(value = "/add")
+    @ResponseBody
+    public Object add(HttpServletRequest request, HttpServletResponse response,@RequestBody JSONObject obj){
+        String[] jsonArrays = request.getParameterValues("object");
+        System.err.println(jsonArrays);
+        return  null;
+    }
+
+    @RequestMapping(value = "/addtask")
+    @ResponseBody
+    public Object addtask(@RequestBody Xgt_sub_task_dtl xgt_sub_task_dtl){
+       xgt_sub_task_dtl.setSt_id(1);
+        return this.xgt_sub_task_dtlMapper.insert(xgt_sub_task_dtl);
+    }
+}

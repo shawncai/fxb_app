@@ -1,0 +1,126 @@
+{
+  "index.html": {
+    "refer": [
+      "main.html",
+      "index.html",
+      "main_ls.html"
+    ],
+    "resources": []
+  },
+  "main.html": {
+    "refer": [
+      "barcode_scan.html",
+      "barcode.html",
+      "plus/barcode.html",
+      "setting.html",
+      "plus/message.html",
+      "plus/orientation.html",
+      "mainp0.html",
+      "churuku.html",
+      "saomiao.html",
+      "todaywork.html",
+      "renwu.html",
+      "cuoti.html"
+    ],
+    "resources": [
+      "images/ýýýG_20180904103354.png"
+    ]
+  },
+  "plus/barcode.html": {
+    "refer": [
+      "plus/barcode_scan.html",
+      "plus/doc.html",
+      "plus/barcode_scan2.html"
+    ],
+    "resources": []
+  },
+  "plus/message.html": {
+    "refer": [
+      "plus/doc.html"
+    ]
+  },
+  "churuku.html": {
+    "refer": [
+      "gonghuo.html",
+      "cangku.html",
+      "chanping.html",
+      "saomiao.html"
+    ]
+  },
+  "gonghuo.html": {
+    "refer": [
+      "churuku.html",
+      "gonghuobianji.html"
+    ]
+  },
+  "cangku.html": {
+    "refer": [
+      "gonghuobianji.html",
+      "cangkubianji.html"
+    ]
+  },
+  "chanping.html": {
+    "refer": [
+      "chanpingbianjia.html"
+    ]
+  },
+  "chanpingbianjia.html": {
+    "refer": [
+      "plus/doc.html"
+    ]
+  },
+  "todaywork.html": {
+    "refer": [
+      "dati.html",
+      "main.html"
+    ]
+  },
+  "dati.html": {
+    "refer": [
+      "daan.html"
+    ]
+  },
+  "renwu.html": {
+    "refer": [
+      "todaywork.html",
+      "main.html",
+      "lishi.html"
+    ],
+    "resources": [
+      "main.html"
+    ]
+  },
+  "cuoti.html": {
+    "refer": [
+      "main.html"
+    ]
+  },
+  "main_ls.html": {
+    "refer": [
+      "nianji.html"
+    ]
+  },
+  "nianji.html": {
+    "refer": [
+      "main_ls.html",
+      "todaywork.html",
+      "shijuan.html"
+    ]
+  },
+  "shijuan.html": {
+    "refer": [
+      "yicuoti.html"
+    ]
+  },
+  "lishi.html": {
+    "refer": [
+      "todaywork.html",
+      "lishizuoye.html"
+    ]
+  },
+  "lishizuoye.html": {
+    "refer": [
+      "dati.html"
+    ]
+  }
+}

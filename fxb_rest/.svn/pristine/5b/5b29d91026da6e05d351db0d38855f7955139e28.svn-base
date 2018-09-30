@@ -1,0 +1,17 @@
+package wy.rest.addons.fxb.xgt_sub_exam.warpper;
+
+import java.util.Map;
+
+import org.apache.commons.collections.functors.ConstantFactory;
+import wy.core.base.warpper.BaseControllerWarpper;
+import java.util.List;
+
+import wy.core.util.SpringContextHolder;
+
+/**
+ * 试卷warpper接口
+ *
+ * @author wyFrame
+ * @Date 2018-09-04 11:49:20
+ */
+ 

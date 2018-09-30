@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wy.rest.addons.fxb.xgt_sub_task_dtl.dao.Xgt_sub_task_dtlDao">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="wy.rest.addons.fxb.xgt_sub_task_dtl.model.Xgt_sub_task_dtl">
+	<id column="task_dtl_id" property="task_dtl_id" />
+	<result column="over_id" property="over_id" />
+	<result column="sub_qp_id" property="sub_qp_id" />
+	<result column="task_obj_id" property="task_obj_id" />
+	<result column="user_ask" property="user_ask" />
+	<result column="right_ask" property="right_ask" />
+	<result column="right_errof_flg" property="right_errof_flg" />
+	<result column="mdi_dt" property="mdi_dt" />
+	<result column="cre_dt" property="cre_dt" />
+	<result column="cpn_id" property="cpn_id" />
+	<result column="st_id" property="st_id" />
+	</resultMap>
+	
+
+	
+	<!-- 通过Id查询任务详情 -->
+	<select id="queryById" resultMap="BaseResultMap">
+		select * from xgt_sub_task_dtl
+		where task_dtl_id = #{xgt_sub_task_dtlId}
+	</select>
+
+		<!-- 任务详情列表 -->
+    	<select id="list" resultType="map">
+    		select xgt_sub_task_dtl.*,user.name,xyd_cpn.cpn_nm from xgt_sub_task_dtl
+                    LEFT JOIN user on xgt_sub_task_dtl.over_id =user.id
+                    LEFT JOIN xyd_cpn on xgt_sub_task_dtl.cpn_id =xyd_cpn.cpn_id
+            where 1=1
+    		<if test="condition != null and condition != ''">
+            and (1&lt;1)
+            </if>
+            <if test="st_id != null and st_id !=0">
+            and st_id=#{st_id}
+             </if>
+    		order by task_dtl_id desc
+    	</select>
+        <select id="getMap1" resultType="map">
+              select name name,id num from user
+        </select>
+        <select id="getMap9" resultType="map">
+              select cpn_nm name,cpn_id num from xyd_cpn
+        </select>
+        <update id="deleteByIds" parameterType="list">
+            UPDATE xgt_sub_task_dtl SET xyd_st_id = -1 where task_dtl_id in
+           <foreach collection="list" item="item" open="(" separator="," close=")">
+                   #{item}
+             </foreach>
+        </update>
+
+	<select id="XuanZelist" resultType="map">
+		select d.*,q.sub_qp_anl from
+		xgt_sub_task_dtl as d
+		LEFT JOIN xgt_sub_qp as q
+		on d.sub_qp_id=q.sub_qp_id
+		where d.over_id=#{Id} and q.sub_qp_tp_id=1
+		and d.cre_dt=#{myDate}
+</select>
+
+	<select id="PanDuanlist" resultType="map">
+		select d.*,q.sub_qp_anl ,IF(d.user_ask=1,'正确','错误') as userask,IF(d.right_ask=1,'正确','错误')as rightask,IF(d.right_errof_flg=1,'正确','错误')as rightflg from
+		xgt_sub_task_dtl as d
+		LEFT JOIN xgt_sub_qp as q
+		on d.sub_qp_id=q.sub_qp_id
+		where d.over_id=#{Id} and q.sub_qp_tp_id=3
+		and d.cre_dt=#{myDate}
+	</select>
+
+	<select id="Dananlist" resultType="map">
+		select from xgt_sub_task_dtl
+	</select>
+
+	<select id="selectRightAsk" resultType="java.lang.String">
+		select sub_qp_answer from xgt_sub_qp where sub_qp_id=#{sub_qp_id}
+	</select>
+
+	<select id="selectCpnId" resultType="java.lang.Integer">
+		select cpn_id from user where id=#{userid}
+	</select>
+
+	<select id="XuanZeError" resultType="map">
+			select d.task_dtl_id,q.sub_qp_id,q.sub_qp_anl,q.sub_qp_title,q.sub_qp_sel_a,q.sub_qp_sel_b,q.sub_qp_sel_c,q.sub_qp_sel_d,d.user_ask,d.right_ask
+			from xgt_sub_task_dtl as d
+			left JOIN xgt_sub_qp as q
+			on d.sub_qp_id=q.sub_qp_id
+		  where right_errof_flg=0 and q.sub_qp_tp_id=1 and d.over_id=#{userId}
+	</select>
+
+	<select id="PanDuanError" resultType="map">
+		select d.task_dtl_id,q.sub_qp_anl,q.sub_qp_id,q.sub_qp_title,IF(q.sub_qp_yes=1,'正确','错误')as subqp_yes,IF(q.sub_qp_no=1,'正确','错误')as subqp_no,IF(d.user_ask=1,'正确','错误') as userask,IF(d.right_ask=1,'正确','错误')as rightask
+		from xgt_sub_task_dtl as d
+		left JOIN xgt_sub_qp as q
+		on d.sub_qp_id=q.sub_qp_id
+		where right_errof_flg=0 and q.sub_qp_tp_id=3 and d.over_id=#{userId}
+	</select>
+
+	<update id="updateOverStId">
+		  UPDATE xgt_sub_task_obj SET over_st_id = 3 WHERE over_id = #{userid} AND task_obj_id=#{taskobjId}
+	</update>
+
+	<select id="selectZuotiList" resultType="map">
+		select a1.task_id,a1.cpn_dept_id,a1.cre_dt,a1.task_nm,a1.sub_qp_id,a1.sub_qp_title,
+       sum((case when a2.right_errof_flg = 0 then 1 else 0 end ) ) as error_num,
+       sum((case when a2.right_errof_flg = 1 then 1 else 0 end ) ) as rigth_num,
+       sum((case when a2.right_errof_flg is null then 1 else 0 end ) ) as no_complete_num
+		from
+		(select m1.task_obj_id,m1.over_id,m2.task_id,m2.id,m2.task_nm,m2.cre_dt,m3.cpn_dept_id,m4.sub_qp_id,m4.sub_qp_title
+			from xgt_sub_task_obj m1,
+				 xgt_sub_task m2,
+				 xyd_cpn_dept_user m3,
+				 xgt_sub_qp m4
+			where 1=1
+			and m2.task_id=#{task_id}
+			and m3.cpn_dept_id =#{cpn_dept_id}
+			and m1.task_id=m2.task_id
+			and  m3.id=m1.over_id
+			and m4.sub_exam_id = m2.sub_exam_id
+			) a1
+			left join xgt_sub_task_dtl a2 on a1.task_obj_id= a2.task_obj_id and a1.over_id=a2.over_id and a1.sub_qp_id=a2.sub_qp_id
+			group by a1.task_id,a1.cpn_dept_id,a1.cre_dt,a1.task_nm,a1.sub_qp_id,a1.sub_qp_title
+			order by error_num desc
+	</select>
+</mapper>
